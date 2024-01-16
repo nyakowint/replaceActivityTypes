@@ -58,6 +58,10 @@ export function ReplaceTutorial() {
                 Another method is to start the app in question, then open Discord's console and look for a log from RPCServer saying something like
                 <code>"cmd: 'SET_ACTIVITY'"</code> with your app's name somewhere inside
             </Forms.FormText>
+
+            <Forms.FormTitle tag="h3" style={{ color: "var(--text-danger)", textAlign: "center" }}>
+                Note: ActivityTypes other than Playing will only show timestamps on Mobile. It's a Discord issue.
+            </Forms.FormTitle>
         </>
     );
 }
