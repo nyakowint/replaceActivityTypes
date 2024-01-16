@@ -90,7 +90,6 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                             value={setting.enabled}
                             onChange={value => {
                                 onChange(value, i, "enabled");
-                                update();
                             }}
                             className={Margins.bottom16}
                             hideBorder={true}
@@ -113,6 +112,7 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                                 { label: "Playing", value: ActivityType.PLAYING },
                                 { label: "Watching", value: ActivityType.WATCHING },
                                 { label: "Listening", value: ActivityType.LISTENING },
+                                { label: "Competing", value: ActivityType.COMPETING }
                             ]}
                             select={value => {
                                 onChange(value, i, "activityType");
@@ -121,6 +121,16 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                             isSelected={value => setting.activityType === value}
                             serialize={identity}
                         />
+                        <Switch
+                            value={setting.swapNameAndDetails}
+                            onChange={value => {
+                                onChange(value, i, "swapNameAndDetails");
+                            }}
+                            className={Margins.bottom16}
+                            hideBorder={true}
+                        >
+                            Swap presence name and details
+                        </Switch>
                     </Card>
                 )
             }

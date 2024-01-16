@@ -22,14 +22,6 @@ export type AppIdSetting = {
     enabled: boolean;
 };
 
-
-// const appIds = [
-//     // insert discord appids here
-//     "1095440531821170820",
-//     "968292722391785512",
-//     "1043858434585526382"
-// ];
-
 export interface Activity {
     state: string;
     details: string;
