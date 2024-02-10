@@ -19,6 +19,7 @@ export type AppIdSetting = {
     appId: string;
     swapNameAndDetails: boolean;
     activityType: ActivityType;
+    streamUrl: string;
     enabled: boolean;
 };
 
@@ -29,6 +30,7 @@ export interface Activity {
         start?: number;
         end?: number;
     };
+    url?: string;
     assets: ActivityAssets;
     buttons?: Array<string>;
     name: string;
@@ -48,6 +50,7 @@ interface ActivityAssets {
 
 export const enum ActivityType {
     PLAYING = 0,
+    STREAMING = 1,
     LISTENING = 2,
     WATCHING = 3,
     COMPETING = 5
@@ -56,6 +59,7 @@ export const enum ActivityType {
 export const makeEmptyAppId: () => AppIdSetting = () => ({
     appId: "",
     appName: "Unknown",
+    streamUrl: "",
     swapNameAndDetails: false,
     activityType: ActivityType.PLAYING,
     enabled: true
@@ -109,11 +113,17 @@ export default definePlugin({
         appIds.forEach(app => {
             if (app.enabled && app.appId === activity.application_id) {
                 activity.type = app.activityType;
+
+                if (app.activityType === ActivityType.STREAMING && app.streamUrl) {
+                    activity.url = app.streamUrl;
+                }
+
                 if (app.swapNameAndDetails) {
                     const media = activity.details;
                     activity.details = activity.name;
                     activity.name = media;
                 }
+
             }
         });
     },

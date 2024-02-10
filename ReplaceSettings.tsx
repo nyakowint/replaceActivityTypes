@@ -110,13 +110,25 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                                 !v || isValidSnowflake(v) || "Invalid appId, must be a snowflake"
                             }
                         />
+                        {setting.activityType === ActivityType.STREAMING &&
+                            <>
+                                <Forms.FormTitle>Stream URL</Forms.FormTitle>
+                                <CheckedTextInput
+                                    value={setting.streamUrl}
+                                    onChange={async v => {
+                                        onChange(v, i, "streamUrl");
+                                    }}
+                                    validate={st => !/https?:\/\/(www\.)?(twitch\.tv|youtube\.com)\/\w+/.test(st) && "Only Twitch and Youtube urls will work." || true}
+                                />
+                            </>}
                         <Forms.FormTitle>New activity type</Forms.FormTitle>
                         <Select
                             options={[
                                 { label: "Playing", value: ActivityType.PLAYING },
                                 { label: "Watching", value: ActivityType.WATCHING },
                                 { label: "Listening", value: ActivityType.LISTENING },
-                                { label: "Competing", value: ActivityType.COMPETING }
+                                { label: "Competing", value: ActivityType.COMPETING },
+                                { label: "Streaming", value: ActivityType.STREAMING }
                             ]}
                             select={value => {
                                 onChange(value, i, "activityType");
