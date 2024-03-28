@@ -93,7 +93,7 @@ export default definePlugin({
     patches: [
         // how has this patch not broken yet lol (i do not like fixing patches tho)
         {
-            find: '.displayName="LocalActivityStore"',
+            find: '="LocalActivityStore",',
             replacement: {
                 match: /LOCAL_ACTIVITY_UPDATE:function\((\i)\)\{/,
                 replace: "$&$self.patchActivity($1.activity);",
